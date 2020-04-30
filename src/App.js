@@ -11,9 +11,9 @@ import './App.css';
 window.location.hash = "";
 
 
-const barUpdateincrement = 800; //somehow keep this read only?
+const barUpdateincrement = 800;
 const infoUpdateIncrement = 7000;
-
+const BASE_API = "https://api.spotify.com/v1/me/player/";
 
 class App extends Component {
 
@@ -31,10 +31,52 @@ class App extends Component {
         this.tick = this.tick.bind(this);
     }
 
+    /**
+     * Send POST request to move to previous song
+     * todo: if the user is >10% through song, move song to beginning, but don't go to previous song
+     */
+    async stepBack() {
+        await axios.post(`${BASE_API}previous`,
+            {},
+            { headers: { 'Authorization': "Bearer " + this.state.token } })
+            .catch(e => console.log(e));
+
+    }
+
+    /**
+     * Send POST request to move to next song
+     */
+    async stepForward() {
+        await axios.post(`${BASE_API}next`,
+            {},
+            { headers: { 'Authorization': "Bearer " + this.state.token } })
+            .catch(e => console.log(e));
+    }
+
+    /**
+     * Send PUT request to pause/play
+     */
+    async togglePlay() {
+        if (this.state.is_playing) { //if playing, then pause
+            await axios.put(`${BASE_API}pause`,
+                {},
+                { headers: { 'Authorization': "Bearer " + this.state.token } })
+                .catch(e => console.log(e));
+        } else { //if paused, then play
+            await axios.put(`${BASE_API}play`,
+                {},
+                { headers: { 'Authorization': "Bearer " + this.state.token } })
+                .catch(e => console.log(e));
+        }
+
+        this.setState({ is_playing: !this.state.is_playing }); //invert is_playing
+
+    }
+
     async getCurrentlyPlaying(token) {
         console.log("Getting current song")
 
-        await axios.get("https://api.spotify.com/v1/me/player",
+        await axios.get(BASE_API,
             { headers: { 'Authorization': "Bearer " + token } })
             .then(res => {
                 if (res.data) {
@@ -113,6 +155,9 @@ class App extends Component {
                             item={this.state.item}
                             is_playing={this.state.is_playing}
                             progress_ms={this.state.progress_ms}
+                            stepBack={this.stepBack.bind(this)}
+                            stepForward={this.stepForward.bind(this)}
+                            togglePlay={this.togglePlay.bind(this)}
                         />
                     )}
                 </header>

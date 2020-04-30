@@ -29,6 +29,7 @@
     height: 6px;
     border-radius: 3px;
     overflow: hidden;
+    margin-bottom: 1em;
   }
   .progress__bar {
     background-color: #eee;
