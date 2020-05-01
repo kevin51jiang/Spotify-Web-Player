@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Spotify-Web-Player/static/css/main.2f8462ba.chunk.css",
+    "main.js": "/Spotify-Web-Player/static/js/main.5b644417.chunk.js",
+    "main.js.map": "/Spotify-Web-Player/static/js/main.5b644417.chunk.js.map",
+    "runtime-main.js": "/Spotify-Web-Player/static/js/runtime-main.a3a3ef0e.js",
+    "runtime-main.js.map": "/Spotify-Web-Player/static/js/runtime-main.a3a3ef0e.js.map",
+    "static/js/2.344def27.chunk.js": "/Spotify-Web-Player/static/js/2.344def27.chunk.js",
+    "static/js/2.344def27.chunk.js.map": "/Spotify-Web-Player/static/js/2.344def27.chunk.js.map",
+    "index.html": "/Spotify-Web-Player/index.html",
+    "precache-manifest.3af785ffbb8b8c64e80e36b147ac3515.js": "/Spotify-Web-Player/precache-manifest.3af785ffbb8b8c64e80e36b147ac3515.js",
+    "service-worker.js": "/Spotify-Web-Player/service-worker.js",
+    "static/css/main.2f8462ba.chunk.css.map": "/Spotify-Web-Player/static/css/main.2f8462ba.chunk.css.map",
+    "static/js/2.344def27.chunk.js.LICENSE.txt": "/Spotify-Web-Player/static/js/2.344def27.chunk.js.LICENSE.txt",
+    "static/media/record.webp": "/Spotify-Web-Player/static/media/record.6264d8cb.webp"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a3a3ef0e.js",
+    "static/js/2.344def27.chunk.js",
+    "static/css/main.2f8462ba.chunk.css",
+    "static/js/main.5b644417.chunk.js"
+  ]
+}
