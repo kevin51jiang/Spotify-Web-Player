@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import { default_item } from './default';
-import { authEndpoint, clientId, redirectUri, scopes } from './config';
+import { authEndpoint, clientId, redirectUri, scopes, barUpdateincrement, infoUpdateIncrement } from './config';
 import Player from "./Player";
 import hash from "./hash";
 
@@ -10,9 +10,6 @@ import './App.css';
 
 window.location.hash = "";
 
-
-const barUpdateincrement = 800;
-const infoUpdateIncrement = 7000;
 const BASE_API = "https://api.spotify.com/v1/me/player/";
 
 class App extends Component {
@@ -36,10 +33,23 @@ class App extends Component {
      * todo: if the user is >10% through song, move song to beginning, but don't go to previous song
      */
     async stepBack() {
-        await axios.post(`${BASE_API}previous`,
-            {},
-            { headers: { 'Authorization': "Bearer " + this.state.token } })
-            .catch(e => console.log(e));
+        const cutoff = 20000; // time before seeking to start instead of going to previous track (ms)
+
+        if (this.state.progress_ms < cutoff) { // go to previous track
+            await axios.post(`${BASE_API}previous`,
+                {},
+                { headers: { 'Authorization': "Bearer " + this.state.token } })
+                .catch(e => console.log(e));
+        } else { // go to start of current track
+            await axios.put(`${BASE_API}seek`,
+                {},
+                {
+                    headers: { 'Authorization': "Bearer " + this.state.token },
+                    params: { position_ms: 0 }
+                })
+                .catch(e => console.log(e));
+        }
+
 
     }
 
