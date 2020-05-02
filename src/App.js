@@ -108,7 +108,7 @@ class App extends Component {
                     })
                 }
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log(JSON.parse(JSON.stringify(err))));
     }
 
     componentDidMount() {
@@ -149,16 +149,19 @@ class App extends Component {
         return (
             <div className="App">
                 <header className="App-header">
-                    {/* <img src={logo} className="App-logo" alt="logo" /> */}
                     {!this.state.token && (
-                        <a
-                            className="btn btn--loginApp-link"
-                            href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
-                                "%20"
-                            )}&response_type=token&show_dialog=true`}
-                        >
-                            Login to Spotify
-                        </a>
+                        <>
+                            <a
+                                className="btn btn--loginApp-link"
+                                href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
+                                    "%20"
+                                )}&response_type=token&show_dialog=true`}
+                            >
+                                Login to Spotify
+                            </a>
+                            
+                            <span>You may or may not regret it</span>
+                        </>
                     )}
                     {this.state.token && (
                         <Player

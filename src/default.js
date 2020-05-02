@@ -8,5 +8,3 @@ export const default_item = {
     artists: [{ name: "No Artist" }],
     duration_ms: 0
 }
-
-// export default default_item;

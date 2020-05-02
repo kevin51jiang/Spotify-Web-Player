@@ -7,8 +7,6 @@ import './Control.css';
 class Control extends Component {
     constructor(props) {
         super(props);
-
-        // this.props.stepBack.bind(this);
     }
 
     stepBack = () => {
