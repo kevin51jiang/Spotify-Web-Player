@@ -3,39 +3,34 @@ import axios from 'axios';
 import log from 'loglevel';
 import { isDev } from "./utils";
 import { default_item } from './default';
-import { authEndpoint, clientId, redirectUri, scopes, barUpdateincrement, infoUpdateIncrement } from './config';
+import { clientId, redirectUri, scopes, barUpdateincrement, infoUpdateIncrement } from './config';
 import Player from "./Player";
-import hash from "./hash";
+
+import { SpotifyAuth } from "react-spotify-auth";
+import "react-spotify-auth/dist/index.css";
 
 import './App.css';
 
-window.location.hash = "";
 
 const BASE_API = "https://api.spotify.com/v1/me/player/";
-
 log.setLevel(isDev ? 'INFO' : 'SILENT');
 
 class App extends Component {
 
     constructor() {
         super();
-
         this.state = {
-
             token: null,
             item: default_item,
             progress_ms: 0
         };
-
-        this.getCurrentlyPlaying = this.getCurrentlyPlaying.bind(this);
-        this.tick = this.tick.bind(this);
     }
 
     /**
      * Send POST request to move to previous song
      * todo: if the user is >10% through song, move song to beginning, but don't go to previous song
      */
-    async stepBack() {
+    stepBack = async () => {
         const cutoff = 20000; // time before seeking to start instead of going to previous track (ms)
 
         if (this.state.progress_ms < cutoff) { // go to previous track
@@ -52,14 +47,12 @@ class App extends Component {
                 })
                 .catch(e => log.info(e));
         }
-
-
     }
 
     /**
      * Send POST request to move to next song
      */
-    async stepForward() {
+    stepForward = async () => {
         await axios.post(`${BASE_API}next`,
             {},
             { headers: { 'Authorization': "Bearer " + this.state.token } })
@@ -69,10 +62,11 @@ class App extends Component {
     /**
      * Send PUT request to pause/play
      */
-    async togglePlay(toPlay = null) {
+    togglePlay = async (toPlay = null) => {
 
         if (toPlay) {         
             console.log('toPlay', toPlay)
+
             await axios.put(`${BASE_API}play`,
                 {},
                 { headers: { 'Authorization': "Bearer " + this.state.token }, data: { context_uri: toPlay} })
@@ -100,13 +94,13 @@ class App extends Component {
         }
     }
 
-<<<<<<< HEAD
+    /**
+     * Sends get request 
+     * @param {string} token Spotify Auth token
+     */
     getCurrentlyPlaying = async (token) => {
-        console.log("Getting current song")
-=======
-    async getCurrentlyPlaying(token) {
+
         log.info("Getting current song")
->>>>>>> 5391176e072b08897da1be91ceee2c0b35c7f281
 
         await axios.get(BASE_API,
             { headers: { 'Authorization': "Bearer " + token } })
@@ -134,23 +128,25 @@ class App extends Component {
     }
 
     componentDidMount() {
+        // // check local storage
+        const token = window.localStorage.getItem('spotifyAuthToken')
 
-        let _token = hash.access_token;
-        log.info('hash', hash)
-        log.info('window.location', window.location);
-        if (_token) {
+        log.debug('found token in localstorage', token)
+
+        if (token) {
             this.setState({
-                token: _token
+                token: token
             });
+            this.getCurrentlyPlaying(token);
         }
-        this.getCurrentlyPlaying(_token);
 
+        // initialize intervals for checking info and updating progress bar
         this.barInterval = setInterval(() => this.updateBar(), barUpdateincrement);
         this.interval = setInterval(() => this.tick(), infoUpdateIncrement);
     }
 
 
-    updateBar() {
+    updateBar = () => {
         if (this.state.token && this.state.is_playing) {
             this.setState({
                 progress_ms: this.state.progress_ms + barUpdateincrement
@@ -159,7 +155,7 @@ class App extends Component {
         }
     }
 
-    tick() {
+    tick = () => {
         if (this.state.token) {
             this.getCurrentlyPlaying(this.state.token);
         }
@@ -170,34 +166,39 @@ class App extends Component {
     }
 
 
+    onAccessToken = (token) => {
+        log.info('setting access token ', token)
+        this.setState({
+            token: token
+        })
+        this.getCurrentlyPlaying(token);
+    }
+
     render() {
         return (
             <div className="App">
                 <header className="App-header">
-                    {!this.state.token && (
+                    {!this.state.token ?
                         <>
-                            <a
-                                className="btn btn--loginApp-link"
-                                href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
-                                    "%20"
-                                )}&response_type=token&show_dialog=true`}
-                            >
-                                Login to Spotify
-                            </a>
-
-                            <span>You may or may not regret it</span>
+                            <h1>Spotify Web Player</h1>
+                            <h2>Login to view your currently playing songs</h2>
+                            <SpotifyAuth
+                                redirectUri={redirectUri}
+                                clientID={clientId}
+                                scopes={scopes}
+                                onAccessToken={this.onAccessToken}
+                            />
                         </>
-                    )}
-                    {this.state.token && (
+                        :
                         <Player
                             item={this.state.item}
                             is_playing={this.state.is_playing}
                             progress_ms={this.state.progress_ms}
-                            stepBack={this.stepBack.bind(this)}
-                            stepForward={this.stepForward.bind(this)}
-                            togglePlay={this.togglePlay.bind(this)}
+                            stepBack={this.stepBack}
+                            stepForward={this.stepForward}
+                            togglePlay={this.togglePlay}
                         />
-                    )}
+                    }
                 </header>
             </div>
         )

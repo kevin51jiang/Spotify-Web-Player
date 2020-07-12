@@ -53,8 +53,8 @@ class Player extends React.Component {
                 className="progress__bar"
                 style={progressBarStyles}
               />
-
             </div>
+
             <Control
               className="control"
               is_playing={this.props.is_playing}

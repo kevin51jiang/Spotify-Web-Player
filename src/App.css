@@ -32,7 +32,8 @@
   padding: 0;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -47,6 +48,11 @@ body {
   display: none;
 }
 
+h1,
+h2 {
+  padding: 1rem;
+}
+
 /** Buttons **/
 
 .btn {
@@ -55,7 +61,7 @@ body {
   border: 0.2em solid #1ecd97;
   color: #1ecd97;
   cursor: pointer;
-  font-size: 3vmin;
+  /* font-size: 2vmin; */
   padding: 0.7em 1.5em;
   text-transform: uppercase;
   transition: all 0.25s ease;

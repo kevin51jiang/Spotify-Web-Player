@@ -21,9 +21,9 @@ class Control extends Component {
     render() {
         return (
             <div className="controller">
-                <button onClick={this.stepBack.bind(this)}><MdSkipPrevious /></button>
-                <button onClick={this.togglePlay.bind(this)} className="centerButton"> {this.props.is_playing ? <MdPauseCircleOutline /> : <MdPlayCircleOutline />} </button>
-                <button onClick={this.stepForward.bind(this)}><MdSkipNext /></button>
+                <button onClick={this.stepBack}><MdSkipPrevious /></button>
+                <button onClick={this.togglePlay} className="centerButton"> {this.props.is_playing ? <MdPauseCircleOutline /> : <MdPlayCircleOutline />} </button>
+                <button onClick={this.stepForward}><MdSkipNext /></button>
             </div>
         );
     }
