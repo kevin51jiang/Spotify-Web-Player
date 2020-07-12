@@ -66,24 +66,38 @@ class App extends Component {
     /**
      * Send PUT request to pause/play
      */
-    async togglePlay() {
-        if (this.state.is_playing) { //if playing, then pause
-            await axios.put(`${BASE_API}pause`,
-                {},
-                { headers: { 'Authorization': "Bearer " + this.state.token } })
-                .catch(e => console.log(e));
-        } else { //if paused, then play
+    async togglePlay(toPlay = null) {
+
+        if (toPlay) {         
+            console.log('toPlay', toPlay)
             await axios.put(`${BASE_API}play`,
                 {},
-                { headers: { 'Authorization': "Bearer " + this.state.token } })
+                { headers: { 'Authorization': "Bearer " + this.state.token }, data: { context_uri: toPlay} })
                 .catch(e => console.log(e));
+        } else {
+            if (this.state.is_playing) { //if playing, then pause
+                await axios.put(`${BASE_API}pause`,
+                    {},
+                    { headers: { 'Authorization': "Bearer " + this.state.token } })
+                    .catch(e => console.log(e));
+            } else { //if paused, then play
+
+                await axios.put(`${BASE_API}play`,
+                    {},
+                    {
+                        headers: {
+                            'Authorization': "Bearer " + this.state.token
+                        }
+                    })
+                    .catch(e => console.log(e));
+            }
+
+            this.setState({ is_playing: !this.state.is_playing }); //invert is_playing
+
         }
-
-        this.setState({ is_playing: !this.state.is_playing }); //invert is_playing
-
     }
 
-    async getCurrentlyPlaying(token) {
+    getCurrentlyPlaying = async (token) => {
         console.log("Getting current song")
 
         await axios.get(BASE_API,

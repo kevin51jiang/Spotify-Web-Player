@@ -1,0 +1,64 @@
+.monthly-playlist {
+  z-index: 10;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  transition: all 1.2s ease-out;
+  top: 3rem;
+}
+
+.monthly-playlist--extended {
+  right: 0.5em;
+}
+
+.monthly-playlist--hidden {
+  right: -9.5rem;
+}
+
+.monthly-playlist .slideout {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 1em 0 0 1em;
+  border: 0.2em solid #1ecd97;
+  color: #1ecd97;
+  cursor: pointer;
+  font-size: 0.5em;
+  padding: 1rem 0.7em;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.monthly-playlist .slideout:hover {
+  color: #62ffcd;
+  border-color: #147959;
+  transition-duration: 0.75s;
+}
+
+.monthly-playlist .pullout-body {
+  background-color: rgba(0, 0, 0, 0.3);
+  flex-direction: column;
+  border-radius: 0 0.5em 0.5em 0;
+  border: 0.2em solid #1ecd97;
+  transition-duration: 0.75s;
+}
+
+.monthly-playlist .pullout-body:hover {
+  border-color: #147959;
+  transition-duration: 0.75s;
+}
+
+.monthly-playlist .pullout-body button {
+  /* text-transform: lowercase; */
+  border: none;
+  stroke: none;
+  background: none;
+  color: #1ecd97;
+  font-size: 0.5em;
+  cursor: pointer;
+  padding: 1em 1.4em;
+  transition-duration: 0.75s;
+}
+.monthly-playlist .pullout-body button:hover {
+  color: #62ffcd;
+  transition-duration: 0.75s;
+}
