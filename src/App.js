@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import log from 'loglevel';
+import { isDev } from "./utils";
 import { default_item } from './default';
 import { authEndpoint, clientId, redirectUri, scopes, barUpdateincrement, infoUpdateIncrement } from './config';
 import Player from "./Player";
@@ -11,6 +12,8 @@ import './App.css';
 window.location.hash = "";
 
 const BASE_API = "https://api.spotify.com/v1/me/player/";
+
+log.setLevel(isDev ? 'INFO' : 'SILENT');
 
 class App extends Component {
 
@@ -39,7 +42,7 @@ class App extends Component {
             await axios.post(`${BASE_API}previous`,
                 {},
                 { headers: { 'Authorization': "Bearer " + this.state.token } })
-                .catch(e => console.log(e));
+                .catch(e => log.info(e));
         } else { // go to start of current track
             await axios.put(`${BASE_API}seek`,
                 {},
@@ -47,7 +50,7 @@ class App extends Component {
                     headers: { 'Authorization': "Bearer " + this.state.token },
                     params: { position_ms: 0 }
                 })
-                .catch(e => console.log(e));
+                .catch(e => log.info(e));
         }
 
 
@@ -60,7 +63,7 @@ class App extends Component {
         await axios.post(`${BASE_API}next`,
             {},
             { headers: { 'Authorization': "Bearer " + this.state.token } })
-            .catch(e => console.log(e));
+            .catch(e => log.info(e));
     }
 
     /**
@@ -71,12 +74,12 @@ class App extends Component {
             await axios.put(`${BASE_API}pause`,
                 {},
                 { headers: { 'Authorization': "Bearer " + this.state.token } })
-                .catch(e => console.log(e));
+                .catch(e => log.info(e));
         } else { //if paused, then play
             await axios.put(`${BASE_API}play`,
                 {},
                 { headers: { 'Authorization': "Bearer " + this.state.token } })
-                .catch(e => console.log(e));
+                .catch(e => log.info(e));
         }
 
         this.setState({ is_playing: !this.state.is_playing }); //invert is_playing
@@ -84,7 +87,7 @@ class App extends Component {
     }
 
     async getCurrentlyPlaying(token) {
-        console.log("Getting current song")
+        log.info("Getting current song")
 
         await axios.get(BASE_API,
             { headers: { 'Authorization': "Bearer " + token } })
@@ -108,14 +111,14 @@ class App extends Component {
                     })
                 }
             })
-            .catch(err => console.log(JSON.parse(JSON.stringify(err))));
+            .catch(err => log.info(JSON.parse(JSON.stringify(err))));
     }
 
     componentDidMount() {
 
         let _token = hash.access_token;
-        console.log('hash', hash)
-        console.log('window.location', window.location);
+        log.info('hash', hash)
+        log.info('window.location', window.location);
         if (_token) {
             this.setState({
                 token: _token
