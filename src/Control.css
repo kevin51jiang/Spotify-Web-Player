@@ -9,6 +9,7 @@
     border-width: 0;
     transform: translateY(-0.8em);
     color: lightslategray;
+    cursor: pointer;
 }
 
 .controller button:hover {

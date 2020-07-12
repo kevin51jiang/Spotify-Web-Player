@@ -5,6 +5,7 @@ import { MdSkipPrevious, MdPlayCircleOutline, MdPauseCircleOutline, MdSkipNext }
 import './Control.css';
 
 class Control extends Component {
+
     stepBack = () => {
         this.props.stepBack();
     }

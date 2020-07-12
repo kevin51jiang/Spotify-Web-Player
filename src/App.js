@@ -62,20 +62,36 @@ class App extends Component {
     /**
      * Send PUT request to pause/play
      */
-    togglePlay = async () => {
-        if (this.state.is_playing) { //if playing, then pause
-            await axios.put(`${BASE_API}pause`,
-                {},
-                { headers: { 'Authorization': "Bearer " + this.state.token } })
-                .catch(e => log.info(e));
-        } else { //if paused, then play
+    togglePlay = async (toPlay = null) => {
+
+        if (toPlay) {         
+            console.log('toPlay', toPlay)
+
             await axios.put(`${BASE_API}play`,
                 {},
-                { headers: { 'Authorization': "Bearer " + this.state.token } })
-                .catch(e => log.info(e));
-        }
+                { headers: { 'Authorization': "Bearer " + this.state.token }, data: { context_uri: toPlay} })
+                .catch(e => console.log(e));
+        } else {
+            if (this.state.is_playing) { //if playing, then pause
+                await axios.put(`${BASE_API}pause`,
+                    {},
+                    { headers: { 'Authorization': "Bearer " + this.state.token } })
+                    .catch(e => console.log(e));
+            } else { //if paused, then play
 
-        this.setState({ is_playing: !this.state.is_playing }); //invert is_playing
+                await axios.put(`${BASE_API}play`,
+                    {},
+                    {
+                        headers: {
+                            'Authorization': "Bearer " + this.state.token
+                        }
+                    })
+                    .catch(e => console.log(e));
+            }
+
+            this.setState({ is_playing: !this.state.is_playing }); //invert is_playing
+
+        }
     }
 
     /**
@@ -83,6 +99,7 @@ class App extends Component {
      * @param {string} token Spotify Auth token
      */
     getCurrentlyPlaying = async (token) => {
+
         log.info("Getting current song")
 
         await axios.get(BASE_API,

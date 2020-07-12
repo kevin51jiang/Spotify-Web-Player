@@ -3,6 +3,7 @@ import React from 'react';
 
 import "./Player.css";
 import Control from './Control';
+import MonthlyPlaylist from './MonthlyPlaylist';
 
 
 class Player extends React.Component {
@@ -15,6 +16,7 @@ class Player extends React.Component {
   render() {
 
     const backgroundStyles = {
+      zIndex: -1,
       backgroundImage: `url(${this.props.item.album.images[0].url})`
     };
 
@@ -28,8 +30,9 @@ class Player extends React.Component {
 
     return (
       <>
+        <MonthlyPlaylist togglePlay={this.props.togglePlay} />
         <div className="main-wrapper">
-          <div className="background" style={backgroundStyles} />{" "}
+          <div className="background" style={backgroundStyles} />
           <div className="now-playing__img">
             <img alt={this.props.item.album.artists ? (
               `Now playing ${this.props.item.name} by ${artistsToString()}`.slice(0, -2)
@@ -40,7 +43,6 @@ class Player extends React.Component {
           <div className="now-playing__side">
             <div className="now-playing__name">{this.props.item.name}</div>
             <div className="now-playing__artist">
-
               {(`${this.props.item.artists.reduce((accum, artist) => accum + artist.name + ', ', '')}`).slice(0, -2)}
             </div>
             <div className="now-playing__status">
@@ -61,8 +63,8 @@ class Player extends React.Component {
               togglePlay={this.props.togglePlay.bind(this)}
             />
           </div>
-
         </div>
+
       </>
     );
   }
