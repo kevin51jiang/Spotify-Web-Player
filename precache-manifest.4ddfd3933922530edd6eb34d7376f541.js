@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "82e17554820f1c7133ee5d3ce3a11424",
+    "revision": "3f78a3035a47821394a869c9121f5542",
     "url": "/Spotify-Web-Player/index.html"
   },
   {
-    "revision": "17384633a3c0c1930d89",
+    "revision": "52d5d359889b3ef23361",
     "url": "/Spotify-Web-Player/static/css/2.cee7d49f.chunk.css"
   },
   {
-    "revision": "92928bf0d9092c3adcb6",
-    "url": "/Spotify-Web-Player/static/css/main.58c040a9.chunk.css"
+    "revision": "2f9841e87676e1af83d2",
+    "url": "/Spotify-Web-Player/static/css/main.a229ce6f.chunk.css"
   },
   {
-    "revision": "17384633a3c0c1930d89",
-    "url": "/Spotify-Web-Player/static/js/2.ceba791d.chunk.js"
+    "revision": "52d5d359889b3ef23361",
+    "url": "/Spotify-Web-Player/static/js/2.7b29fe96.chunk.js"
   },
   {
     "revision": "e88a3e95b5364d46e95b35ae8c0dc27d",
-    "url": "/Spotify-Web-Player/static/js/2.ceba791d.chunk.js.LICENSE.txt"
+    "url": "/Spotify-Web-Player/static/js/2.7b29fe96.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "92928bf0d9092c3adcb6",
-    "url": "/Spotify-Web-Player/static/js/main.d413de95.chunk.js"
+    "revision": "2f9841e87676e1af83d2",
+    "url": "/Spotify-Web-Player/static/js/main.7cc54f77.chunk.js"
   },
   {
     "revision": "335c99065712c495ee34",
