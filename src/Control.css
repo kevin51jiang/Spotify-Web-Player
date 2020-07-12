@@ -2,7 +2,7 @@
     padding-top: 0.5em;
 }
 
-button {
+.controller button {
     display: inline-flex;
     background-color: transparent;
     font-size: 3em;
@@ -11,11 +11,11 @@ button {
     color: lightslategray;
 }
 
-button:hover {
+.controller button:hover {
     color: aliceblue;
 }
 
-.centerButton {
+.controller .centerButton {
     margin-top: 0.5em;
     font-size: 4em;
     margin-left: 1em;
