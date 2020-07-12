@@ -112,7 +112,10 @@ class App extends Component {
     }
 
     componentDidMount() {
+
         let _token = hash.access_token;
+        console.log('hash', hash)
+        console.log('window.location', window.location);
         if (_token) {
             this.setState({
                 token: _token
@@ -159,7 +162,7 @@ class App extends Component {
                             >
                                 Login to Spotify
                             </a>
-                            
+
                             <span>You may or may not regret it</span>
                         </>
                     )}
