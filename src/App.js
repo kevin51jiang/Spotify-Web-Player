@@ -7,8 +7,9 @@ import { clientId, redirectUri, scopes, barUpdateincrement, infoUpdateIncrement 
 import Player from "./Player";
 
 import { SpotifyAuth } from "react-spotify-auth";
-import './App.css';
 import "react-spotify-auth/dist/index.css";
+
+import './App.css';
 
 
 const BASE_API = "https://api.spotify.com/v1/me/player/";
