@@ -1,11 +1,11 @@
+import { isDev } from "./utils";
 import { Scopes } from "react-spotify-auth";
 
 export const authEndpoint = "https://accounts.spotify.com/authorize";
 
 
 export const clientId = "316e898df20d4a0d8c486499c9dc7abf";
-export const redirectUri = "http://localhost:3000/redirect";
-
+export const redirectUri = isDev ? "http://localhost:3000/redirect" : 'http://kevinjiang.ca/Spotify-Web-Player';
 export const scopes = [
   Scopes.userTopRead,
   Scopes.userReadCurrentlyPlaying,

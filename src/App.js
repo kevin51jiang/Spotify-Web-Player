@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import log from 'loglevel';
 import { isDev } from "./utils";
-import { default_item } from './default';
+import { default_item } from './components/default';
 import { clientId, redirectUri, scopes, barUpdateincrement, infoUpdateIncrement } from './config';
-import Player from "./Player";
+import Player from "./components/Player";
 
 import { SpotifyAuth } from "react-spotify-auth";
 import "react-spotify-auth/dist/index.css";
