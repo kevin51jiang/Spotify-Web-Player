@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/Spotify-Web-Player/static/css/main.abb16e07.chunk.css",
-    "main.js": "/Spotify-Web-Player/static/js/main.80bed536.chunk.js",
+    "main.js": "/Spotify-Web-Player/static/js/main.1794e0da.chunk.js",
     "runtime-main.js": "/Spotify-Web-Player/static/js/runtime-main.ba652ce1.js",
     "static/css/2.cee7d49f.chunk.css": "/Spotify-Web-Player/static/css/2.cee7d49f.chunk.css",
     "static/js/2.022d4b29.chunk.js": "/Spotify-Web-Player/static/js/2.022d4b29.chunk.js",
     "index.html": "/Spotify-Web-Player/index.html",
-    "precache-manifest.4b27447c0fe3739d160e10999c43cff1.js": "/Spotify-Web-Player/precache-manifest.4b27447c0fe3739d160e10999c43cff1.js",
+    "precache-manifest.43f69c88dff4e2ffdf160d2044faa8b3.js": "/Spotify-Web-Player/precache-manifest.43f69c88dff4e2ffdf160d2044faa8b3.js",
     "service-worker.js": "/Spotify-Web-Player/service-worker.js",
     "static/js/2.022d4b29.chunk.js.LICENSE.txt": "/Spotify-Web-Player/static/js/2.022d4b29.chunk.js.LICENSE.txt",
     "static/media/record.webp": "/Spotify-Web-Player/static/media/record.6264d8cb.webp",
@@ -17,6 +17,6 @@
     "static/css/2.cee7d49f.chunk.css",
     "static/js/2.022d4b29.chunk.js",
     "static/css/main.abb16e07.chunk.css",
-    "static/js/main.80bed536.chunk.js"
+    "static/js/main.1794e0da.chunk.js"
   ]
 }
