@@ -1,4 +1,4 @@
-import record from "./record.webp"
+import record from "./vinyl.jpg"
 
 export const default_item = {
     album: {
